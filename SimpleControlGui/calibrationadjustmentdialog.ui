@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CalibrationAdjustmentDialog</class>
+ <widget class="QDialog" name="CalibrationAdjustmentDialog">
+  <property name="windowModality">
+   <enum>Qt::WindowModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <item>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="2" column="1">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Square:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2">
+      <widget class="QLineEdit" name="square">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Y:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>Z:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="2">
+      <widget class="QLineEdit" name="y"/>
+     </item>
+     <item row="6" column="3">
+      <widget class="QPushButton" name="Done">
+       <property name="text">
+        <string>Done</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>X:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="2">
+      <widget class="QLineEdit" name="z"/>
+     </item>
+     <item row="3" column="2">
+      <widget class="QLineEdit" name="x"/>
+     </item>
+     <item row="3" column="3">
+      <widget class="QPushButton" name="xplus">
+       <property name="text">
+        <string>+</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="4">
+      <widget class="QPushButton" name="Cancel">
+       <property name="text">
+        <string>Cancel</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="4">
+      <widget class="QPushButton" name="xminus">
+       <property name="text">
+        <string>-</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="3">
+      <widget class="QPushButton" name="yplus">
+       <property name="text">
+        <string>+</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="4">
+      <widget class="QPushButton" name="yminus">
+       <property name="text">
+        <string>-</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="3">
+      <widget class="QPushButton" name="zplus">
+       <property name="text">
+        <string>+</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="4">
+      <widget class="QPushButton" name="zminus">
+       <property name="text">
+        <string>-</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1" colspan="4">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Adjust the position of the arm to the center of the indicated square, and 10 mm above the board</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>Done</sender>
+   <signal>pressed()</signal>
+   <receiver>CalibrationAdjustmentDialog</receiver>
+   <slot>onDone()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>263</x>
+     <y>278</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Cancel</sender>
+   <signal>pressed()</signal>
+   <receiver>CalibrationAdjustmentDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>349</x>
+     <y>278</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>xplus</sender>
+   <signal>pressed()</signal>
+   <receiver>CalibrationAdjustmentDialog</receiver>
+   <slot>onXPlus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>263</x>
+     <y>194</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>xminus</sender>
+   <signal>pressed()</signal>
+   <receiver>CalibrationAdjustmentDialog</receiver>
+   <slot>onXMinus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>349</x>
+     <y>194</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>yplus</sender>
+   <signal>pressed()</signal>
+   <receiver>CalibrationAdjustmentDialog</receiver>
+   <slot>onYPlus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>263</x>
+     <y>222</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>yminus</sender>
+   <signal>pressed()</signal>
+   <receiver>CalibrationAdjustmentDialog</receiver>
+   <slot>onYMinus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>349</x>
+     <y>222</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>zplus</sender>
+   <signal>pressed()</signal>
+   <receiver>CalibrationAdjustmentDialog</receiver>
+   <slot>onZPlus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>263</x>
+     <y>250</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>zminus</sender>
+   <signal>pressed()</signal>
+   <receiver>CalibrationAdjustmentDialog</receiver>
+   <slot>onZMinus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>349</x>
+     <y>250</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>onXPlus()</slot>
+  <slot>onXMinus()</slot>
+  <slot>onYPlus()</slot>
+  <slot>onYMinus()</slot>
+  <slot>onZPlus()</slot>
+  <slot>onZMinus()</slot>
+  <slot>onDone()</slot>
+ </slots>
+</ui>

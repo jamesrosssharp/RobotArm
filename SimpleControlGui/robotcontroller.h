@@ -30,7 +30,14 @@ public:
     void moveToCartesian(double x, double y, double z);
     void moveToCylindrical(double rho, double theta, double h);
 
+    void setWristAdjust(double w) { m_wristAdjust = w; moveTo(m_base, m_shoulder, m_elbow, m_wrist, m_gripper); }
+    double getWristAdjust() { return m_wristAdjust; }
+
     void setSpeed(double speed) { m_speed = speed; }
+
+    bool computeInverseCartesian(double x, double y, double z,
+                                  double& base, double& shoulder, double& elbow, double& wrist);
+
 
     enum class ReturnCode
     {
@@ -96,6 +103,8 @@ private:
 
     int m_steps;
     int m_curstep;
+
+    double m_wristAdjust = 0.0;
 
     State m_state;
 

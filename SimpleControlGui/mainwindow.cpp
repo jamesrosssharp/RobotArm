@@ -3,22 +3,21 @@
 
 #include "chessboard.h"
 
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    cal(new CalibrationDialog(this))
+    cal(new CalibrationDialog(this)),
+    m_chessboard(new Chessboard)
 {
     ui->setupUi(this);
     robocon = new RobotController(cal->getCalData(), cal->getHomePosition());
-    calwiz = new CalibrationWizard(this, robocon, cal->getCalData());
+    calwiz = new CalibrationWizard(this, robocon, cal->getCalData(), m_chessboard);
 
     connect(cal, SIGNAL(accepted()), this, SLOT(onCalibrationDialogClosed()));
 
     timer = new QTimer();
 
     connect(timer, SIGNAL(timeout()), this, SLOT(update()));
-
 }
 
 MainWindow::~MainWindow()
@@ -28,6 +27,7 @@ MainWindow::~MainWindow()
     // cal is child; implicitly deleted by Qt
     delete robocon;
     delete calwiz;
+    delete m_chessboard;
     delete ui;
 }
 
@@ -242,7 +242,7 @@ void MainWindow::onGoSquare()
     double xc, yc, zc;
 
 
-    Chessboard::getSquareXYZ(rank, file, x, y, z);
+    m_chessboard->getSquareXYZ(rank, file, x, y, z);
 
     robocon->getPositionCartesian(xc, yc, zc);
     robocon->moveToCartesian(x, y, zc);

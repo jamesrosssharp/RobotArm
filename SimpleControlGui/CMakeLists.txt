@@ -14,7 +14,8 @@ set (SRC_LIST ${SRC_LIST} mainwindow.ui mainwindow.cpp main.cpp calibrationdialo
                           calibrationdata.cpp homeposition.cpp robotcontroller.cpp vector2d.cpp matrix2d.cpp
                           kinematics.cpp calibrationadjustmentdialog.cpp calibrationadjustmentdialog.ui
                           calibrationresultsdialog.cpp calibrationresultsdialog.ui calibrationwizard.cpp
-                          chessboard.cpp calibrationresultsgraph.cpp)
+                          chessboard.cpp calibrationresultsgraph.cpp matrix.cpp leastsquares.cpp calibrationdonedialog.cpp
+                          calibrationdonedialog.ui)
 
 add_executable(${PROJECT_NAME} ${SRC_LIST})
 

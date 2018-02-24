@@ -5,7 +5,7 @@
 class Chessboard
 {
 public:
-    static void getSquareXYZ(int rank, int file, double& x, double& y, double& z);
+    void getSquareXYZ(int rank, int file, double& x, double& y, double& z);
 };
 
 #endif // CHESSBOARD_H

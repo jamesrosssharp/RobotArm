@@ -98,5 +98,20 @@ std::ostream& operator << (std::ostream& os, CalibrationAngle& a)
     return os;
 }
 
+void CalibrationData::updateFromRegressions(reg_t& base, reg_t& shoulder, reg_t& elbow, reg_t& wrist)
+{
+    auto calcUs = [=] (double ang, reg_t& reg) { return reg.first*ang + reg.second; };
+
+    m_base.minUs = calcUs(m_base.minDeg, base);
+    m_base.maxUs = calcUs(m_base.maxDeg, base);
+    m_shoulder.minUs = calcUs(m_shoulder.minDeg, shoulder);
+    m_shoulder.maxUs = calcUs(m_shoulder.maxDeg, shoulder);
+    m_elbow.minUs = calcUs(m_elbow.minDeg, elbow);
+    m_elbow.maxUs = calcUs(m_elbow.maxDeg, elbow);
+    m_wrist.minUs = calcUs(m_wrist.minDeg, wrist);
+    m_wrist.maxUs = calcUs(m_wrist.maxDeg, wrist);
+
+    std::cout << "Setting calibration data to " << m_base << " " << m_shoulder << " " << m_elbow << " " << m_wrist << std::endl;
+}
 
 

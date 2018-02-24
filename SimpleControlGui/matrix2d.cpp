@@ -29,3 +29,14 @@ Vector2D operator * (const Matrix2D& a, const Vector2D& b)
     return Vector2D(a.m_a*b.x() + a.m_b*b.y(), a.m_c*b.x() + a.m_d*b.y());
 }
 
+Matrix2D Matrix2D::inverse()
+{
+    double det = m_a * m_d - m_b * m_c;
+
+    if (det == 0.0)
+        throw std::runtime_error("Matrix was singular");
+
+    Matrix2D out(m_d / det, -m_b / det, -m_c / det, m_a / det);
+
+    return out;
+}

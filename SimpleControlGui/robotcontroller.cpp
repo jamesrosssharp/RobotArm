@@ -4,6 +4,8 @@
 #include <cmath>
 #include <sstream>
 
+const double kXOffset = 4.0;
+
 RobotController::RobotController(CalibrationData* cal, HomePosition* home)   :
     m_cal(cal),
     m_home(home)
@@ -42,6 +44,7 @@ void RobotController::getPositionCartesian(double& x, double& y, double& z)
     // Forward kinematics: x, y, and z from joint angles
 
     Kinematics::computeForwardCartesian(m_base, m_shoulder, m_elbow, m_wrist, x, y, z);
+    x += kXOffset;
 }
 
 void RobotController::getPositionAngles(double& baseAng, double& baseUs,
@@ -55,21 +58,23 @@ void RobotController::getPositionAngles(double& baseAng, double& baseUs,
 
     m_cal->getCalibrationData(base, shoulder, elbow, wrist, gripper);
 
-    std::vector<std::tuple<CalibrationAngle*, double*, double*, double*>> vec =
-                                                             {std::make_tuple(&base, &m_base, &baseAng, &baseUs),
-                                                              std::make_tuple(&shoulder, &m_shoulder, &shoulderAng, &shoulderUs),
-                                                              std::make_tuple(&elbow, &m_elbow, &elbowAng, &elbowUs),
-                                                              std::make_tuple(&wrist, &m_wrist, &wristAng, &wristUs),
-                                                              std::make_tuple(&gripper, &m_gripper, &gripperAng, &gripperUs)};
+    std::vector<std::tuple<CalibrationAngle*, double*, double*, double*, bool>> vec =
+    {std::make_tuple(&base, &m_base, &baseAng, &baseUs, false),
+     std::make_tuple(&shoulder, &m_shoulder, &shoulderAng, &shoulderUs, false),
+     std::make_tuple(&elbow, &m_elbow, &elbowAng, &elbowUs, false),
+     std::make_tuple(&wrist, &m_wrist, &wristAng, &wristUs, true),
+     std::make_tuple(&gripper, &m_gripper, &gripperAng, &gripperUs, false)};
+
     for (auto& v : vec)
     {
         CalibrationAngle* c = std::get<0>(v);
         double* a = std::get<1>(v);
         double* aout = std::get<2>(v);
         double* usout = std::get<3>(v);
+        bool isWrist = std::get<4>(v);
 
         *aout = *a;
-        *usout = lerpAngle(*c, *a);
+        *usout = lerpAngle(*c, *a + (isWrist ? m_wristAdjust : 0.0));
     }
 
 
@@ -203,6 +208,13 @@ void RobotController::moveToCylindrical(double rho, double theta, double h)
 
 }
 
+bool RobotController::computeInverseCartesian(double x, double y, double z,
+                              double& base, double& shoulder, double& elbow, double& wrist)
+{
+    Kinematics::computeInverseCartesian(x - kXOffset, y, z, base, shoulder, elbow, wrist);
+}
+
+
 RobotController::ReturnCode RobotController::update()
 {
     ReturnCode code;
@@ -248,7 +260,7 @@ RobotController::ReturnCode RobotController::update()
                         m_y += m_gy;
                         m_z += m_gz;
 
-                        Kinematics::computeInverseCartesian(m_x, m_y, m_z, m_base, m_shoulder, m_elbow, m_wrist);
+                        computeInverseCartesian(m_x, m_y, m_z, m_base, m_shoulder, m_elbow, m_wrist);
 
                         break;
                     case LerpMode::kCyl:

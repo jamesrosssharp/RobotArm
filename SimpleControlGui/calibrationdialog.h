@@ -21,6 +21,7 @@ public:
     CalibrationData* getCalData() { return data; }
     HomePosition* getHomePosition() { return home; }
 
+
 public slots:
     void accept();
     void reject();

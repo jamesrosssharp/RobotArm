@@ -2,6 +2,8 @@
 
 #include "vector2d.h"
 
+class Matrix;
+
 class Matrix2D
 {
 public:
@@ -11,6 +13,10 @@ public:
 
     friend  Matrix2D operator * (const Matrix2D& a, const Matrix2D& b);
     friend  Vector2D operator * (const Matrix2D& a, const Vector2D& b);
+
+    Matrix2D inverse();
+
+    friend class Matrix;
 
 private:
 

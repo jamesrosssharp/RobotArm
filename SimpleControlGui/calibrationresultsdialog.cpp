@@ -23,5 +23,6 @@ void CalibrationResultsDialog::setJoint(QString joint, Angle a1, Angle a2, Angle
 {
     ui->joint->setText(joint);
     m_graph->setAngles(a1, a2, a3, a4);
+    m_graph->setTrendline(trendline_m, trendline_c);
 }
 

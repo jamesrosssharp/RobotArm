@@ -5,6 +5,7 @@
 
 #include "calibrationdata.h"
 #include "robotcontroller.h"
+#include "chessboard.h"
 
 namespace Ui {
 class CalibrationAdjustmentDialog;
@@ -15,7 +16,7 @@ class CalibrationAdjustmentDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit CalibrationAdjustmentDialog(RobotController* robocon, QWidget *parent = 0);
+    explicit CalibrationAdjustmentDialog(RobotController* robocon, Chessboard* chessboard, QWidget *parent = 0);
     ~CalibrationAdjustmentDialog();
 
     void setSquare(int rank, int file);
@@ -35,6 +36,9 @@ public slots:
 
     void onDone();
 
+    void onWristPlus();
+    void onWristMinus();
+
 private:
     Ui::CalibrationAdjustmentDialog *ui;
 
@@ -51,6 +55,10 @@ private:
     Angle m_wrist;
 
     RobotController* m_robocon;
+
+    bool m_moveBeforeAdjust;
+
+    Chessboard* m_chessboard;
 
 };
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <utility>
 
 struct CalibrationAngle
 {
@@ -54,6 +55,9 @@ public:
                             CalibrationAngle& elbow,
                             CalibrationAngle& wrist,
                             CalibrationAngle& gripper);
+    using reg_t = std::pair<double, double>;
+
+    void updateFromRegressions(reg_t& base, reg_t& shoulder, reg_t& elbow, reg_t& wrist);
 
     void saveCalibrationData();
 

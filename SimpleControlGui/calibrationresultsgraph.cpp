@@ -84,6 +84,15 @@ void CalibrationResultsGraph::paintEvent(QPaintEvent* event)
         painter.drawText(x - 40, y, QString("%1").arg(a));
     }
 
+    // trend line
+
+    painter.setPen(QColor(0,0,255));
+
+    auto calcY = [=] (double ang) { return (ang*m_m + m_c - minUs)*(ymax - ymin) / (maxUs - minUs) + ymin; };
+
+    painter.drawLine(xmin, calcY(minAngle), xmax, calcY(maxAngle));
+
+
 }
 
 void CalibrationResultsGraph::setAngles(const Angle& a1, const Angle& a2, const Angle& a3, const Angle& a4)
@@ -94,4 +103,9 @@ void CalibrationResultsGraph::setAngles(const Angle& a1, const Angle& a2, const 
     m_a4 = a4;
 }
 
+void CalibrationResultsGraph::setTrendline(double m, double c)
+{
+    m_m = m;
+    m_c = c;
+}
 

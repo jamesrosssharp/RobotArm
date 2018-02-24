@@ -7,6 +7,7 @@
 #include "calibrationdialog.h"
 #include "calibrationwizard.h"
 #include "robotcontroller.h"
+#include "chessboard.h"
 
 namespace Ui {
 class MainWindow;
@@ -46,6 +47,7 @@ private:
     RobotController* robocon;
     CalibrationWizard* calwiz;
     QTimer* timer;
+    Chessboard* m_chessboard;
 };
 
 #endif // MAINWINDOW_H

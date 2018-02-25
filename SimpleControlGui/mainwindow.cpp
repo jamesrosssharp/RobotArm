@@ -13,6 +13,8 @@ MainWindow::MainWindow(QWidget *parent) :
     robocon = new RobotController(cal->getCalData(), cal->getHomePosition());
     calwiz = new CalibrationWizard(this, robocon, cal->getCalData(), m_chessboard);
 
+    m_sqcal = new SquareCalibrator(m_chessboard, robocon, this);
+
     connect(cal, SIGNAL(accepted()), this, SLOT(onCalibrationDialogClosed()));
 
     timer = new QTimer();
@@ -28,6 +30,7 @@ MainWindow::~MainWindow()
     delete robocon;
     delete calwiz;
     delete m_chessboard;
+    delete m_sqcal;
     delete ui;
 }
 
@@ -252,4 +255,13 @@ void MainWindow::onGoSquare()
 void MainWindow::onCalibrationWizard()
 {
     calwiz->doWizard();
+}
+
+void MainWindow::onCalibrateSquare()
+{
+    int rank = ui->rankCombo->currentIndex();
+    int file = ui->fileCombo->currentIndex();
+
+    m_sqcal->doDialog(rank, file);
+
 }

@@ -8,6 +8,7 @@
 #include "calibrationwizard.h"
 #include "robotcontroller.h"
 #include "chessboard.h"
+#include "squarecalibrator.h"
 
 namespace Ui {
 class MainWindow;
@@ -34,6 +35,7 @@ public slots:
     void onCylGo();
     void onGoSquare();
     void onCalibrationWizard();
+    void onCalibrateSquare();
 
 private:
 
@@ -48,6 +50,7 @@ private:
     CalibrationWizard* calwiz;
     QTimer* timer;
     Chessboard* m_chessboard;
+    SquareCalibrator* m_sqcal;
 };
 
 #endif // MAINWINDOW_H

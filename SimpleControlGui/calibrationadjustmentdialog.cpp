@@ -9,11 +9,16 @@ const double kYInc = 0.5;
 const double kZInc = 0.5;
 const double kWInc = 0.1;
 
+const double kXMove = 10.0;
+const double kYMove = 10.0;
+const double kZMove = 10.0;
+
+
 CalibrationAdjustmentDialog::CalibrationAdjustmentDialog(RobotController* robocon,  Chessboard* chessboard, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::CalibrationAdjustmentDialog),
     m_robocon(robocon),
-    m_moveBeforeAdjust(false),
+    m_moveBeforeAdjust(true),
     m_chessboard(chessboard)
 {
     ui->setupUi(this);
@@ -54,10 +59,12 @@ void CalibrationAdjustmentDialog::onXMinus()
 {
     double x, y, z;
 
-    if (m_moveBeforeAdjust)
-        m_robocon->moveToCartesian(0, 100, 60);
 
     m_robocon->getPositionCartesian(x, y, z);
+
+    if (m_moveBeforeAdjust)
+        m_robocon->moveToCartesian(x + kXMove, y + kYMove, z + kZMove);
+
 
     x -= kXInc;
 
@@ -73,9 +80,11 @@ void CalibrationAdjustmentDialog::onXPlus()
 {
     double x, y, z;
 
-    if (m_moveBeforeAdjust)
-        m_robocon->moveToCartesian(0, 100, 60);
     m_robocon->getPositionCartesian(x, y, z);
+
+    if (m_moveBeforeAdjust)
+        m_robocon->moveToCartesian(x + kXMove, y + kYMove, z + kZMove);
+
 
     x += kXInc;
 
@@ -90,9 +99,9 @@ void CalibrationAdjustmentDialog::onYMinus()
 {
     double x, y, z;
 
-    if (m_moveBeforeAdjust)
-        m_robocon->moveToCartesian(0, 100, 60);
     m_robocon->getPositionCartesian(x, y, z);
+    if (m_moveBeforeAdjust)
+        m_robocon->moveToCartesian(x + kXMove, y + kYMove, z + kZMove);
 
     y -= kYInc;
 
@@ -107,9 +116,9 @@ void CalibrationAdjustmentDialog::onYPlus()
 {
     double x, y, z;
 
-    if (m_moveBeforeAdjust)
-        m_robocon->moveToCartesian(0, 100, 60);
     m_robocon->getPositionCartesian(x, y, z);
+    if (m_moveBeforeAdjust)
+        m_robocon->moveToCartesian(x + kXMove, y + kYMove, z + kZMove);
 
     y += kXInc;
 
@@ -124,9 +133,9 @@ void CalibrationAdjustmentDialog::onZMinus()
 {
     double x, y, z;
 
-    if (m_moveBeforeAdjust)
-        m_robocon->moveToCartesian(0, 100, 60);
     m_robocon->getPositionCartesian(x, y, z);
+    if (m_moveBeforeAdjust)
+        m_robocon->moveToCartesian(x + kXMove, y + kYMove, z + kZMove);
 
     z -= kZInc;
 
@@ -141,9 +150,9 @@ void CalibrationAdjustmentDialog::onZPlus()
 {
     double x, y, z;
 
-    if (m_moveBeforeAdjust)
-        m_robocon->moveToCartesian(0, 100, 60);
     m_robocon->getPositionCartesian(x, y, z);
+    if (m_moveBeforeAdjust)
+        m_robocon->moveToCartesian(x + kXMove, y + kYMove, z + kZMove);
 
     z += kZInc;
 

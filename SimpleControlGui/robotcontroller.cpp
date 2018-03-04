@@ -4,7 +4,7 @@
 #include <cmath>
 #include <sstream>
 
-const double kXOffset = 4.0;
+const double kXOffset = 0;
 
 RobotController::RobotController(CalibrationData* cal, HomePosition* home)   :
     m_cal(cal),

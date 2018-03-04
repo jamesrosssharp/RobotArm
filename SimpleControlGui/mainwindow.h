@@ -9,6 +9,7 @@
 #include "robotcontroller.h"
 #include "chessboard.h"
 #include "squarecalibrator.h"
+#include "piecemover.h"
 
 namespace Ui {
 class MainWindow;
@@ -36,6 +37,7 @@ public slots:
     void onGoSquare();
     void onCalibrationWizard();
     void onCalibrateSquare();
+    void onMovePiece();
 
 private:
 
@@ -51,6 +53,7 @@ private:
     QTimer* timer;
     Chessboard* m_chessboard;
     SquareCalibrator* m_sqcal;
+    PieceMover* m_pieceMover;
 };
 
 #endif // MAINWINDOW_H

@@ -38,6 +38,8 @@ public:
     bool computeInverseCartesian(double x, double y, double z,
                                   double& base, double& shoulder, double& elbow, double& wrist);
 
+    void moveTo(double base, double shoulder, double elbow, double wrist, double gripper);
+
 
     enum class ReturnCode
     {
@@ -58,7 +60,6 @@ public:
 private:
 
     double lerpAngle(CalibrationAngle& cal, double ang);
-    void moveTo(double base, double shoulder, double elbow, double wrist, double gripper);
     void serialWriteAngles();
 
     CalibrationData* m_cal;

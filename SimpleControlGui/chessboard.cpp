@@ -15,6 +15,17 @@ void Chessboard::getSquareXYZ(int rank, int file, double &x, double &y, double &
     z = m_z[rank][file];
 }
 
+void Chessboard::getTrueSquareXYZ(int rank, int file, double &x, double &y, double &z)
+{
+    const double gridSpacing = 90.0 / 7.0;
+    const double gridY = 85.0;
+
+    x =  -41.0 + gridSpacing * file;
+    y = (7 - rank) * gridSpacing + gridY;
+    z = 15 + 12;
+
+}
+
 void Chessboard::setSquareCalibration(int rank, int file, double x, double y, double z)
 {
     m_x[rank][file] = x;
@@ -74,15 +85,12 @@ void Chessboard::save()
 void Chessboard::setDefaults()
 {
 
-    const double gridSpacing = 90.0 / 7.0;
-    const double gridY = 85.0;
 
     for (int rank = 0; rank < 8; rank++)
         for (int file = 0; file < 8; file++)
         {
-            m_x[rank][file] =  -41.0 + gridSpacing * file;
-            m_y[rank][file] = (7 - rank) * gridSpacing + gridY;
-            m_z[rank][file] = 25.0 + 10.0;
+
+            getTrueSquareXYZ(rank, file, m_x[rank][file], m_y[rank][file], m_z[rank][file]);
         }
 }
 

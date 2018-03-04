@@ -8,6 +8,7 @@ public:
     Chessboard();
 
     void getSquareXYZ(int rank, int file, double& x, double& y, double& z);
+    void getTrueSquareXYZ(int rank, int file, double& x, double& y, double& z);
     void setSquareCalibration(int rank, int file, double x, double y, double z);
 
     void load();

@@ -20,7 +20,7 @@ public:
     ~CalibrationAdjustmentDialog();
 
     void setSquare(int rank, int file);
-    void doDialog();
+    void doDialog(bool isTrue = true);
 
     void getCalibration(Angle& base, Angle& shoulder, Angle& elbow, Angle& wrist);
 public slots:

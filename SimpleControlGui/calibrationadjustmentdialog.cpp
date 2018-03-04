@@ -9,16 +9,16 @@ const double kYInc = 0.5;
 const double kZInc = 0.5;
 const double kWInc = 0.1;
 
-const double kXMove = 10.0;
-const double kYMove = 10.0;
-const double kZMove = 10.0;
+const double kXMove = 5.0;
+const double kYMove = 5.0;
+const double kZMove = 5.0;
 
 
 CalibrationAdjustmentDialog::CalibrationAdjustmentDialog(RobotController* robocon,  Chessboard* chessboard, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::CalibrationAdjustmentDialog),
     m_robocon(robocon),
-    m_moveBeforeAdjust(true),
+    m_moveBeforeAdjust(false),
     m_chessboard(chessboard)
 {
     ui->setupUi(this);
@@ -37,11 +37,14 @@ void CalibrationAdjustmentDialog::setSquare(int rank, int file)
     ui->square->setText(QString("%1%2").arg((char)('a' + file)).arg(rank + 1));
 }
 
-void CalibrationAdjustmentDialog::doDialog()
+void CalibrationAdjustmentDialog::doDialog(bool isTrue)
 {
     double x, y, z;
 
-    m_chessboard->getSquareXYZ(m_rank, m_file, x, y, z);
+    if (isTrue)
+        m_chessboard->getTrueSquareXYZ(m_rank, m_file, x, y, z);
+    else
+        m_chessboard->getSquareXYZ(m_rank, m_file, x, y, z);
 
     m_robocon->moveToCartesian(x, y, z);
 

@@ -16,7 +16,7 @@ void SquareCalibrator::doDialog(int rank, int file)
     m_file = file;
 
     m_cal->setSquare(rank, file);
-    m_cal->doDialog();
+    m_cal->doDialog(false);
 }
 
 void SquareCalibrator::onAccept()

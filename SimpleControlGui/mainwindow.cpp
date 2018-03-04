@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     calwiz = new CalibrationWizard(this, robocon, cal->getCalData(), m_chessboard);
 
     m_sqcal = new SquareCalibrator(m_chessboard, robocon, this);
+    m_pieceMover = new PieceMover(robocon, m_chessboard);
 
     connect(cal, SIGNAL(accepted()), this, SLOT(onCalibrationDialogClosed()));
 
@@ -142,6 +143,7 @@ void MainWindow::update()
     {
         enablePrimaryWidgets();
         updatePrimaryWidgets();
+        m_pieceMover->onMoveComplete();
     }
     else if (ret == RobotController::ReturnCode::kMoving)
     {
@@ -263,5 +265,22 @@ void MainWindow::onCalibrateSquare()
     int file = ui->fileCombo->currentIndex();
 
     m_sqcal->doDialog(rank, file);
+
+}
+
+void MainWindow::onMovePiece()
+{
+
+    int rank1, file1;
+    int rank2, file2;
+
+    rank1 = ui->fromRank->currentIndex();
+    file1 = ui->fromFile->currentIndex();
+    rank2 = ui->toRank->currentIndex();
+    file2 = ui->toFile->currentIndex();
+
+    std::string piece = ui->piece->currentText().toStdString();
+
+    m_pieceMover->begin(rank1, file1, rank2, file2, piece);
 
 }
